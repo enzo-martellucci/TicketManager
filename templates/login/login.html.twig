@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<body class="bg-lightCream h-screen flex items-center justify-center">
+    <div class="bg-darkBlue p-8 rounded-lg shadow-lg w-full max-w-md sm:w-96">
+        <h1 class="text-2xl font-bold mb-6 text-center text-lightCream">Se connecter</h1>
+        {% if error %}
+            <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
+        <form method="post">
+            <div class="mb-4">
+                <label for="username" class="block text-lightCream mb-2">Nom d'utilisateur</label>
+                <input type="text" id="username" name="_username" class="w-full border-gray-300 rounded focus:ring focus:ring-darkCream focus:border-darkCream p-2" value="{{ last_username }}" required autofocus>
+            </div>
+            <div class="mb-6">
+                <label for="password" class="block text-lightCream mb-2">Mot de passe</label>
+                <input type="password" id="password" name="_password" class="w-full border-gray-300 rounded focus:ring focus:ring-darkCream focus:border-darkCream p-2" required>
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" class="bg-blue text-lightCream px-4 py-2 rounded hover:bg-lightBlue">
+                    Connexion
+                </button>
+                <a href="#" class="text-sm text-lightCream hover:underline">Mot de passe oublié ?</a>
+            </div>
+        </form>
+    </div>
+</body>
+{% endblock %}
