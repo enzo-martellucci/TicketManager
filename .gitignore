@@ -27,3 +27,8 @@
 ###> PhpStorm files ###
 .idea
 ###< PhpStorm files ###
+
+###> Npm files ###
+/node_modules
+package.json
+###< PhpStorm files ###
