@@ -4,8 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
-use App\Entity\User; // Assurez-vous que l'entité User existe
-
+use App\Entity\User;
 #[ORM\Entity]
 #[ORM\HasLifecycleCallbacks] // Pour gérer les timestamps automatiques
 class Ticket
