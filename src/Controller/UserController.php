@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class UserController extends AbstractController
 {
-    #[Route('/users', name: 'users')]
+    #[Route('/users', name: 'user_index')]
     public function show(UserRepository $repository): Response
     {
         $users = $repository->findAll();
