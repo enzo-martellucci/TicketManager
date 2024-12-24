@@ -1,0 +1,30 @@
+<div>
+    {% if is_granted('IS_AUTHENTICATED') %}
+        {% include 'partials/navbar/auth_item.html.twig' with { text: 'Your profile', url: path('app_home'), icon: 'fa-regular fa-user', selected: route == 'your-profile' } %}
+    {% else %}
+        {% include 'partials/navbar/auth_item.html.twig' with { text: 'Login', url: path('login'), icon: 'fa-solid fa-right-to-bracket', selected: route == 'login' or route == 'register' } %}
+    {% endif %}
+</div>
+
+<div class="lg:absolute lg:bottom-0 lg:left-0 lg:w-full lg:p-6">
+    {% if is_granted('IS_AUTHENTICATED') %}
+        {% include 'partials/navbar/auth_item.html.twig' with { text: 'Sign out', url: path('logout'), icon: 'fa-solid fa-right-to-bracket', selected: false } %}
+    {% endif %}
+</div>
+
+<nav class="sm:max-lg:col-span-2 lg:mt-32">
+    <ul class="grid gap-6 sm:max-lg:grid-cols-2">
+        <li>
+            {% include 'partials/navbar/menu_item.html.twig' with { text: 'Dashboard', url: path('app_home'), icon: 'fa-solid fa-table', selected: route == 'dashboard' } %}
+        </li>
+        <li>
+            {% include 'partials/navbar/menu_item.html.twig' with { text: 'New ticket', url: path('app_home'), icon: 'fa-regular fa-bookmark', selected: route == 'new-ticket' } %}
+        </li>
+        <li>
+            {% include 'partials/navbar/menu_item.html.twig' with { text: 'Users', url: path('app_home'), icon: 'fa-solid fa-users', selected: route == 'users'} %}
+        </li>
+        <li>
+            {% include 'partials/navbar/menu_item.html.twig' with { text: 'Statistics', url: path('app_home'), icon: 'fa-solid fa-chart-simple', selected: route == 'statistics' } %}
+        </li>
+    </ul>
+</nav>

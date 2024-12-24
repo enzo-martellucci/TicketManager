@@ -1,19 +1,29 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
-        {% endblock %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TicketManager{% endblock %}</title>
+    <link rel="icon" href="{{ asset('images/logo.png') }}">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+    {% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        <h1 class="">Bonjour a tous</h1>
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+        <script src="https://kit.fontawesome.com/dfba18c1d8.js" crossorigin="anonymous"></script>
+    {% endblock %}
+</head>
+<body class="break-all lg:flex">
+    <aside class="grid content-start gap-6 p-6 text-2xl bg-dark-blue sm:max-lg:grid-cols-2 lg:sticky lg:top-0 lg:h-screen lg:w-1/5">
+        {% include 'partials/navbar/navbar.html.twig' with { route: app.request.attributes.get('_route') } %}
+    </aside>
+
+    <main class="bg-light-cream lg:w-5/6">
+        <h1 class="text-center text-6xl">Ticket Manager</h1>
+
+        <img src="{{ asset('images/logo.png') }}" alt="The TicketManager logo" width="100">
         {% block body %}{% endblock %}
-    </body>
+    </main>
+</body>
 </html>

@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    background-color: skyblue;
+.nav-item {
+    @apply flex gap-x-6 items-center p-3 rounded-md transition-colors duration-500;
 }
