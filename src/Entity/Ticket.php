@@ -5,8 +5,8 @@ namespace App\Entity;
 use App\Config\Priority;
 use App\Config\Status;
 use App\Repository\TicketRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TicketRepository::class)]
 class Ticket
@@ -17,29 +17,32 @@ class Ticket
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: "text")]
+    #[Assert\NotBlank]
     private ?string $description = null;
 
     #[ORM\Column(enumType: Status::class)]
+    #[Assert\NotNull]
     private ?Status $status = null;
 
     #[ORM\Column(enumType: Priority::class)]
+    #[Assert\NotNull]
     private ?Priority $priority = null;
 
-    #[ORM\ManyToOne]
-    private ?User $assigned_to = null;
-
     #[ORM\Column]
+    #[Assert\NotNull]
     private ?\DateTimeImmutable $deadline = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+    private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $updated_at = null;
+    private ?\DateTimeImmutable $updatedAt = null;
 
+    // Getters and Setters
     public function getId(): ?int
     {
         return $this->id;
@@ -50,10 +53,9 @@ class Ticket
         return $this->title;
     }
 
-    public function setTitle(string $title): static
+    public function setTitle(string $title): self
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -62,10 +64,9 @@ class Ticket
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(string $description): self
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -74,10 +75,9 @@ class Ticket
         return $this->status;
     }
 
-    public function setStatus(Status $status): static
+    public function setStatus(Status $status): self
     {
         $this->status = $status;
-
         return $this;
     }
 
@@ -86,22 +86,9 @@ class Ticket
         return $this->priority;
     }
 
-    public function setPriority(Priority $priority): static
+    public function setPriority(Priority $priority): self
     {
         $this->priority = $priority;
-
-        return $this;
-    }
-
-    public function getAssignedTo(): ?User
-    {
-        return $this->assigned_to;
-    }
-
-    public function setAssignedTo(?User $assigned_to): static
-    {
-        $this->assigned_to = $assigned_to;
-
         return $this;
     }
 
@@ -110,34 +97,31 @@ class Ticket
         return $this->deadline;
     }
 
-    public function setDeadline(\DateTimeImmutable $deadline): static
+    public function setDeadline(\DateTimeImmutable $deadline): self
     {
         $this->deadline = $deadline;
-
         return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
-        $this->created_at = $created_at;
-
+        $this->createdAt = $createdAt;
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updated_at): static
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
-        $this->updated_at = $updated_at;
-
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 }
