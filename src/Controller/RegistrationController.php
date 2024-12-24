@@ -24,6 +24,9 @@ class RegistrationController extends AbstractController
             $plainPassword = $form->get('plainPassword')->getData();
 
             $user->setPassword($hasher->hashPassword($user, $plainPassword));
+            $user->setRoles(['ROLE_USER']);
+            $user->setCreatedAt(new \DateTimeImmutable('now'));
+
             $entityManager->persist($user);
             $entityManager->flush();
             return $this->redirectToRoute('app_home');
