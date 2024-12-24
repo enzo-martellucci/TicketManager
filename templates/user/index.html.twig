@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block h1 %}Users{% endblock %}
+
+{% block body %}
+    <table class="w-full rounded">
+        <thead class="text-center sm:text-lg font-bold bg-gray-400">
+        <tr>
+            <td class="t-head w-1/12">ID</td>
+            <td class="t-head w-4/12">Email</td>
+            <td class="t-head w-2/12">Role</td>
+            <td class="t-head w-3/12">Created at</td>
+            <td class="t-head w-2/12">Actions</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr class="{{ loop.index % 2 == 0 ? 'bg-gray-200' : 'bg-gray-50' }}">
+                <td class="t-cell text-center">{{ user.id }}</td>
+                <td class="t-cell">{{ user.email }}</td>
+                <td class="t-cell text-center">{{ user.roles[0] | replace({ 'ROLE_': '' }) }}</td>
+                <td class="t-cell text-center">{{ user.createdAt | format_datetime() }}</td>
+                <td class="t-cell">
+                    <div class="flex justify-center gap-x-4 gap-y-2 flex-wrap">
+                        <a href="{{ path('user_edit', { id: user.id }) }}"
+                           class="py-1 px-3 bg-light-blue hover:bg-blue rounded text-black transition-colors">
+                            Edit
+                        </a>
+                        <a href="{{ path('user_delete', { id: user.id }) }}"
+                           class="py-1 px-3 bg-red-400 hover:bg-red-500 rounded text-black transition-colors">
+                            Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

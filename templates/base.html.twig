@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}TicketManager{% endblock %}</title>
+    <title>TicketManager - {% block title %}{% endblock %}</title>
     <link rel="icon" href="{{ asset('images/logo.png') }}">
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
@@ -27,7 +27,9 @@
 
         <main class="mt-10 md:mt-16">
             <h1 class="mb-10 text-3xl sm:text-4xl md:text-5xl">{% block h1 %}Dashboard{% endblock %}</h1>
-            {% block body %}{% endblock %}
+            <div>
+                {% block body %}{% endblock %}
+            </div>
         </main>
     </div>
 </body>

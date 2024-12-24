@@ -5,3 +5,11 @@
 .nav-item {
     @apply flex gap-x-6 items-center p-3 rounded-md transition-colors duration-500;
 }
+
+.t-head {
+    @apply px-2 md:px-4 py-4 border-2 border-black;
+}
+
+.t-cell {
+    @apply px-2 md:px-4 py-2 border-2 border-black;
+}

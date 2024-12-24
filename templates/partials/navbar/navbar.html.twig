@@ -21,7 +21,7 @@
             {% include 'partials/navbar/menu_item.html.twig' with { text: 'New ticket', url: path('app_home'), icon: 'fa-regular fa-bookmark', selected: route == 'new-ticket' } %}
         </li>
         <li>
-            {% include 'partials/navbar/menu_item.html.twig' with { text: 'Users', url: path('app_home'), icon: 'fa-solid fa-users', selected: route == 'users'} %}
+            {% include 'partials/navbar/menu_item.html.twig' with { text: 'Users', url: path('users'), icon: 'fa-solid fa-users', selected: route == 'users'} %}
         </li>
         <li>
             {% include 'partials/navbar/menu_item.html.twig' with { text: 'Statistics', url: path('app_home'), icon: 'fa-solid fa-chart-simple', selected: route == 'statistics' } %}
