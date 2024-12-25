@@ -4,7 +4,7 @@ namespace App\Config;
 
 enum Priority: string
 {
-    case Low = 'Low';
-    case Medium = 'Medium';
-    case High = 'High';
+    case LOW = 'Low';
+    case MEDIUM = 'Medium';
+    case HIGH = 'High';
 }

@@ -1,41 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Create Ticket{% endblock %}
+{% block h1 %}New ticket{% endblock %}
 
 {% block body %}
-<div class="container mx-auto p-6">
-    <h1 class="text-2xl font-bold mb-4">Create a New Ticket</h1>
-
-    {{ form_start(form, { 'attr': { 'class': 'space-y-4' } }) }}
-        <div>
-            {{ form_label(form.title, 'Title', { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
-            {{ form_widget(form.title, { 'attr': { 'class': 'form-input mt-1 block w-full' } }) }}
-            {{ form_errors(form.title) }}
-        </div>
-        <div>
-            {{ form_label(form.description, 'Description', { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
-            {{ form_widget(form.description, { 'attr': { 'class': 'form-textarea mt-1 block w-full' } }) }}
-            {{ form_errors(form.description) }}
-        </div>
-        <div>
-            {{ form_label(form.status, 'Status', { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
-            {{ form_widget(form.status, { 'attr': { 'class': 'form-select mt-1 block w-full' } }) }}
-            {{ form_errors(form.status) }}
-        </div>
-        <div>
-            {{ form_label(form.priority, 'Priority', { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
-            {{ form_widget(form.priority, { 'attr': { 'class': 'form-select mt-1 block w-full' } }) }}
-            {{ form_errors(form.priority) }}
-        </div>
-        <div>
-            {{ form_label(form.deadline, 'Deadline', { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
-            {{ form_widget(form.deadline, { 'attr': { 'class': 'form-input mt-1 block w-full' } }) }}
-            {{ form_errors(form.deadline) }}
-        </div>
-
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-dark-blue font-bold py-2 px-4 rounded">
-            Create Ticket
-        </button>
-    {{ form_end(form) }}
-</div>
+    {{ form(form) }}
 {% endblock %}

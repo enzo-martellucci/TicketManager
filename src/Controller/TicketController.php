@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Config\Status;
 use App\Entity\Ticket;
+use App\Entity\TicketStatusHistory;
+use App\Form\CreateTicketType;
+use App\Form\EditTicketType;
 use App\Repository\TicketRepository;
 use App\Repository\TicketStatusHistoryRepository;
-use App\Form\TicketType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,43 +42,66 @@ class TicketController extends AbstractController
         ]);
     }
 
-    #[Route('/tickets/create', name: 'ticket_create')]
+    #[Route('/tickets/create', name: 'ticket_create', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $ticket = new Ticket();
-        $ticket->setCreatedAt(new \DateTimeImmutable());
-        $ticket->setUpdatedAt(new \DateTimeImmutable());
+        $ticket->setStatus(Status::OPEN);
 
-        $form = $this->createForm(TicketType::class, $ticket);
+        $form = $this->createForm(CreateTicketType::class, $ticket);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $date = new \DateTimeImmutable();
+            $ticket->setCreatedAt($date)
+                ->setUpdatedAt($date);
+
+            $history = new TicketStatusHistory();
+            $history->setTicketId($ticket)
+                ->setChangedBy($this->getUser())
+                ->setStatus(Status::OPEN)
+                ->setChangedAt($date);
+
             $entityManager->persist($ticket);
+            $entityManager->persist($history);
             $entityManager->flush();
 
             return $this->redirectToRoute('ticket_index');
         }
 
         return $this->render('ticket/create.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form
         ]);
     }
 
     #[Route('/tickets/{id}/edit', name: 'ticket_edit')]
     public function edit(Ticket $ticket, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(TicketType::class, $ticket);
+        $form = $this->createForm(EditTicketType::class, $ticket);
 
+        $previousStatus = $ticket->getStatus();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $ticket->setUpdatedAt(new \DateTimeImmutable());
+            if ($previousStatus !== $ticket->getStatus()) {
+                $date = new \DateTimeImmutable();
+                $ticket->setUpdatedAt($date);
+
+                $history = new TicketStatusHistory();
+                $history->setTicketId($ticket)
+                    ->setChangedBy($this->getUser())
+                    ->setStatus($ticket->getStatus())
+                    ->setChangedAt($date);
+
+                $entityManager->persist($history);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('ticket_index');
         }
 
         return $this->render('ticket/edit.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form
         ]);
     }
 

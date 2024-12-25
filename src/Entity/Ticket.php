@@ -16,6 +16,9 @@ class Ticket
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\ManyToOne]
+    private ?User $assigned_to = null;
+
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     private ?string $title = null;
@@ -46,6 +49,18 @@ class Ticket
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getAssignedTo(): ?User
+    {
+        return $this->assigned_to;
+    }
+
+    public function setAssignedTo(?User $assigned_to): static
+    {
+        $this->assigned_to = $assigned_to;
+
+        return $this;
     }
 
     public function getTitle(): ?string

@@ -21,7 +21,7 @@
                 {{ ticket.priority.value }}
                 <hr class="col-span-2 border border-blue">
                 <h3 class="text-xl">Assigned to :</h3>
-                {{ ticket.assignedTo.email }}
+                {{ ticket.assignedTo is null ? '' : ticket.assignedTo.email }}
             </div>
         </section>
 
