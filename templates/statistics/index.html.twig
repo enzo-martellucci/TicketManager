@@ -4,7 +4,7 @@
 {% block h1 %}Statistics{% endblock %}
 
 {% block body %}
-    <h1 style="font-size: 28px; font-weight: bold;">Statistiques des Tickets</h1>
+    <h1 style="font-size: 28px; font-weight: bold;">Tickets statistics</h1>
 
     <!-- Graphique ticket par status -->
     <h2 style="text-decoration: underline; font-size: 20px;">Tickets by Status</h2>
@@ -17,12 +17,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const ticketsByStatus = {{ ticketsByStatus|raw }};
-        const statusLabels = ticketsByStatus.map(item => item.status); 
+        const statusLabels = ticketsByStatus.map(item => item.status);
         const statusCounts = ticketsByStatus.map(item => item.count);
 
         const statusCanvas = document.getElementById('ticketsByStatusChart');
-        statusCanvas.width = 500; 
-        statusCanvas.height = 500; 
+        statusCanvas.width = 500;
+        statusCanvas.height = 500;
 
         const ctx1 = statusCanvas.getContext('2d');
         new Chart(ctx1, {
@@ -31,16 +31,16 @@
                 labels: statusLabels,
                 datasets: [{
                     data: statusCounts,
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],  
-                    borderColor: '#FFFFFF', 
-                    borderWidth: 1 
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 1
                 }]
             },
             options: {
-                responsive: false, 
+                responsive: false,
                 plugins: {
                     legend: {
-                        position: 'bottom', 
+                        position: 'bottom',
                         labels: {
                             font: {
                                 size: 14
@@ -58,12 +58,12 @@
         });
 
         const ticketsByPriority = {{ ticketsByPriority|raw }};
-        const priorityLabels = ticketsByPriority.map(item => item.priority); 
-        const priorityCounts = ticketsByPriority.map(item => item.count); 
+        const priorityLabels = ticketsByPriority.map(item => item.priority);
+        const priorityCounts = ticketsByPriority.map(item => item.count);
 
         const priorityCanvas = document.getElementById('ticketsByPriorityChart');
-        priorityCanvas.width = 500; 
-        priorityCanvas.height = 500; 
+        priorityCanvas.width = 500;
+        priorityCanvas.height = 500;
 
         const ctx2 = priorityCanvas.getContext('2d');
         new Chart(ctx2, {
@@ -82,7 +82,7 @@
                 responsive: false,
                 plugins: {
                     legend: {
-                        position: 'top', 
+                        position: 'top',
                         labels: {
                             font: {
                                 size: 14
@@ -92,7 +92,7 @@
                 },
                 scales: {
                     y: {
-                        beginAtZero: true, 
+                        beginAtZero: true,
                         ticks: {
                             font: {
                                 size: 12
