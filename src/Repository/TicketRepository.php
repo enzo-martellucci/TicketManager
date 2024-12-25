@@ -24,4 +24,24 @@ class TicketRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function countTicketsByStatus(): array
+    {
+        return $this->createQueryBuilder('t')
+            ->select('t.status as status, COUNT(t.id) as count')
+            ->groupBy('t.status')
+            ->getQuery()
+            ->getResult();
+    }
+    
+
+    public function countTicketsByPriority(): array
+    {
+        return $this->createQueryBuilder('t')
+            ->select('t.priority as priority, COUNT(t.id) as count')
+            ->groupBy('t.priority')
+            ->getQuery()
+            ->getResult();
+    }
+    
 }
