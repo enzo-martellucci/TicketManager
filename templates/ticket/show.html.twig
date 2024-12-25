@@ -1,8 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ticket X{% endblock %}
-{% block h1 %}Ticket X{% endblock %}
+{% block title %}Ticket n°{{ ticket.id }}{% endblock %}
+{% block h1 %}Ticket n°{{ ticket.id }} : {{ ticket.title }}{% endblock %}
 
 {% block body %}
-    Bla bla bla show ticket
+    <div class="flex flex-col gap-12 xl:flex-row">
+        <section class="flex-1">
+            <h2 class="mb-4 text-4xl">Informations</h2>
+            <div class="grid grid-cols-2 gap-x-2 gap-y-4 rounded-md border-2 bg-white p-4 text-xl border-blue">
+                <h3 class="text-xl">Created :</h3>
+                <time>{{ ticket.createdAt | format_datetime(pattern: "dd/MM/y HH:mm") }}</time>
+                <hr class="col-span-2 border border-blue">
+                <h3 class="text-xl">Deadline :</h3>
+                <time>{{ ticket.deadline | format_datetime(pattern: "dd/MM/y HH:mm") }}</time>
+                <hr class="col-span-2 border border-blue">
+                <h3 class="text-xl">Status :</h3>
+                <div>{{ ticket.status.value }}</div>
+                <hr class="col-span-2 border border-blue">
+                <h3 class="text-xl">Priority :</h3>
+                {{ ticket.priority.value }}
+                <hr class="col-span-2 border border-blue">
+                <h3 class="text-xl">Assigned to :</h3>
+                {{ ticket.assignedTo.email }}
+            </div>
+        </section>
+
+        <section class="flex-1">
+            <h2 class="mb-4 text-4xl">History</h2>
+            <table class="w-full">
+                <thead class="bg-gray-400 text-center font-bold sm:text-lg">
+                <tr>
+                    <th class="t-head">Status</th>
+                    <th class="t-head">Made at</th>
+                    <th class="t-head">Made by</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for change in history %}
+                    <tr class="{{ loop.index % 2 == 0 ? 'bg-gray-200' : 'bg-gray-50' }}">
+                        <td class="text-center t-cell">{{ change.status.value }}</td>
+                        <td class="text-center t-cell">{{ change.changedAt | format_datetime(pattern: "dd/MM/y HH:mm") }}</td>
+                        <td class="t-cell">{{ change.changedBy.email }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <section class="mt-6">
+        <h2 class="mb-4 text-4xl">Description</h2>
+        <p class="rounded-md border-2 bg-white p-4 border-blue">
+            {{ ticket.description }}
+        </p>
+    </section>
 {% endblock %}

@@ -5,14 +5,14 @@
 {% block h1 %}Users{% endblock %}
 
 {% block body %}
-    <table class="w-full rounded">
+    <table class="w-full">
         <thead class="text-center sm:text-lg font-bold bg-gray-400">
         <tr>
-            <td class="t-head w-1/12">ID</td>
-            <td class="t-head w-4/12">Email</td>
-            <td class="t-head w-2/12">Role</td>
-            <td class="t-head w-3/12">Created at</td>
-            <td class="t-head w-2/12">Actions</td>
+            <th class="t-head w-1/12">ID</th>
+            <th class="t-head w-5/12">Email</th>
+            <th class="t-head w-2/12">Role</th>
+            <th class="t-head w-2/12">Created at</th>
+            <th class="t-head w-2/12">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -21,16 +21,16 @@
                 <td class="t-cell text-center">{{ user.id }}</td>
                 <td class="t-cell">{{ user.email }}</td>
                 <td class="t-cell text-center">{{ user.roles[0] | replace({ 'ROLE_': '' }) }}</td>
-                <td class="t-cell text-center">{{ user.createdAt | format_datetime() }}</td>
+                <td class="t-cell text-center">{{ user.createdAt | format_datetime(pattern: "dd/MM/y HH:mm") }}</td>
                 <td class="t-cell">
-                    <div class="flex justify-center gap-x-4 gap-y-2 flex-wrap">
+                    <div class="flex justify-center gap-2 flex-wrap">
                         <a href="{{ path('user_edit', { id: user.id }) }}"
                            class="py-1 px-3 bg-light-blue hover:bg-blue rounded text-black transition-colors">
-                            Edit
+                            <i class="fa-solid fa-pen-to-square"></i>
                         </a>
                         <a href="{{ path('user_delete', { id: user.id }) }}"
                            class="py-1 px-3 bg-red-400 hover:bg-red-500 rounded text-black transition-colors">
-                            Delete
+                            <i class="fa-solid fa-trash"></i>
                         </a>
                     </div>
                 </td>

@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class UserController extends AbstractController
 {
     #[Route('/users', name: 'user_index')]
-    public function show(UserRepository $repository): Response
+    public function index(UserRepository $repository): Response
     {
         $users = $repository->findAll();
 
@@ -30,7 +30,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-            return $this->redirectToRoute('users');
+            return $this->redirectToRoute('user_index');
         }
 
         return $this->render('user/edit.html.twig', [
@@ -44,6 +44,6 @@ class UserController extends AbstractController
     {
         $entityManager->remove($user);
         $entityManager->flush();
-        return $this->redirectToRoute('users');
+        return $this->redirectToRoute('user_index');
     }
 }

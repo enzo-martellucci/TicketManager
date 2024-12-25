@@ -4,5 +4,41 @@
 {% block h1 %}Dashboard{% endblock %}
 
 {% block body %}
-    Bla bla bla dashboard
+    <table class="w-full">
+        <thead class="text-center sm:text-lg font-bold bg-gray-400">
+        <tr>
+            <th class="t-head w-1/12">ID</th>
+            <th class="t-head w-5/12">Title</th>
+            <th class="t-head w-2/12">Status</th>
+            <th class="t-head w-2/12">Last update</th>
+            <th class="t-head w-2/12">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ticket in tickets %}
+            <tr class="{{ loop.index % 2 == 0 ? 'bg-gray-200' : 'bg-gray-50' }}">
+                <td class="t-cell text-center">{{ ticket.id }}</td>
+                <td class="t-cell">{{ ticket.title }}</td>
+                <td class="t-cell text-center">{{ ticket.status.value }}</td>
+                <td class="t-cell text-center">{{ ticket.updatedAt | format_datetime(pattern: "dd/MM/y HH:mm") }}</td>
+                <td class="t-cell">
+                    <div class="flex justify-center gap-2 flex-wrap">
+                        <a href="{{ path('ticket_show', { id: ticket.id }) }}"
+                           class="py-1 px-3 bg-light-cream hover:bg-dark-cream rounded text-black transition-colors">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                        <a href="{{ path('ticket_edit', { id: ticket.id }) }}"
+                           class="py-1 px-3 bg-light-blue hover:bg-blue rounded text-black transition-colors">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a href="{{ path('ticket_delete', { id: ticket.id }) }}"
+                           class="py-1 px-3 bg-red-400 hover:bg-red-500 rounded text-black transition-colors">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

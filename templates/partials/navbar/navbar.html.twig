@@ -15,13 +15,13 @@
 <nav class="sm:max-lg:col-span-2 lg:mt-32">
     <ul class="grid gap-6 sm:max-lg:grid-cols-2">
         <li>
-            {% include 'partials/navbar/menu_item.html.twig' with { text: 'Dashboard', url: path('ticket_index'), icon: 'fa-solid fa-table', selected: route == 'ticket_index' } %}
+            {% include 'partials/navbar/menu_item.html.twig' with { text: 'Dashboard', url: path('ticket_index'), icon: 'fa-solid fa-table', selected: route starts with 'ticket' and route != 'ticket_create' or route == 'root' } %}
         </li>
         <li>
             {% include 'partials/navbar/menu_item.html.twig' with { text: 'New ticket', url: path('ticket_create'), icon: 'fa-regular fa-bookmark', selected: route == 'ticket_create' } %}
         </li>
         <li>
-            {% include 'partials/navbar/menu_item.html.twig' with { text: 'Users', url: path('user_index'), icon: 'fa-solid fa-users', selected: route == 'user_index'} %}
+            {% include 'partials/navbar/menu_item.html.twig' with { text: 'Users', url: path('user_index'), icon: 'fa-solid fa-users', selected: route starts with 'user'} %}
         </li>
         <li>
             {% include 'partials/navbar/menu_item.html.twig' with { text: 'Statistics', url: path('statistics_index'), icon: 'fa-solid fa-chart-simple', selected: route == 'statistics_index' } %}

@@ -7,9 +7,9 @@
 }
 
 .t-head {
-    @apply px-2 md:px-4 py-4 border-2 border-black;
+    @apply px-2 md:px-4 py-4 border-2 border-blue;
 }
 
 .t-cell {
-    @apply px-2 md:px-4 py-2 border-2 border-black;
+    @apply px-2 md:px-4 py-2 border-2 border-blue;
 }

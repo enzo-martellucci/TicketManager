@@ -17,12 +17,11 @@ class UserType extends AbstractType
             ->add('email')
             ->add('role', ChoiceType::class, [
                 'choices' => [
-                    'User' => 'ROLE_USER',
-                    'Support' => 'ROLE_SUPPORT',
-                    'Admin' => 'ROLE_ADMIN'
+                    'USER' => 'ROLE_USER',
+                    'SUPPORT' => 'ROLE_SUPPORT',
+                    'ADMIN' => 'ROLE_ADMIN'
                 ]
             ])
-            ->add('password')
             ->add('created_at')
             ->add('save', SubmitType::class);
     }
