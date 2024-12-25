@@ -27,14 +27,16 @@
                            class="py-1 px-3 bg-light-cream hover:bg-dark-cream rounded text-black transition-colors">
                             <i class="fa-solid fa-eye"></i>
                         </a>
-                        <a href="{{ path('ticket_edit', { id: ticket.id }) }}"
-                           class="py-1 px-3 bg-light-blue hover:bg-blue rounded text-black transition-colors">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                        <a href="{{ path('ticket_delete', { id: ticket.id }) }}"
-                           class="py-1 px-3 bg-red-400 hover:bg-red-500 rounded text-black transition-colors">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>
+                        {% if is_granted('IS_AUTHENTICATED') %}
+                            <a href="{{ path('ticket_edit', { id: ticket.id }) }}"
+                               class="py-1 px-3 bg-light-blue hover:bg-blue rounded text-black transition-colors">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <a href="{{ path('ticket_delete', { id: ticket.id }) }}"
+                               class="py-1 px-3 bg-red-400 hover:bg-red-500 rounded text-black transition-colors">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        {% endif %}
                     </div>
                 </td>
             </tr>

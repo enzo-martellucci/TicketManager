@@ -9,25 +9,36 @@ use App\Form\CreateTicketType;
 use App\Form\EditTicketType;
 use App\Repository\TicketRepository;
 use App\Repository\TicketStatusHistoryRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class TicketController extends AbstractController
 {
+    #[IsGranted('ROLE_USER')]
     #[Route('/', name: 'root')]
     #[Route('/tickets', name: 'ticket_index')]
-    public function index(TicketRepository $repository): Response
+    public function index(UserRepository $userRepository, TicketRepository $ticketRepository): Response
     {
-        $tickets = $repository->findAll();
+        $user = $userRepository->find($this->getUser());
+        if (in_array('ROLE_USER', $user->getRoles(), true)) {
+            $tickets = $ticketRepository->findAll();
+        } else if (in_array('ROLE_SUPPORT', $user->getRoles(), true)) {
+            $tickets = $ticketRepository->findTicketBySupport($user->getId());
+        } else {
+            $tickets = $ticketRepository->findAll();
+        }
 
         return $this->render('ticket/index.html.twig', [
             'tickets' => $tickets
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/tickets/{id}/show', name: 'ticket_show')]
     public function show(Ticket $ticket, TicketStatusHistoryRepository $repository): Response
     {
@@ -42,6 +53,7 @@ class TicketController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/tickets/create', name: 'ticket_create', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {

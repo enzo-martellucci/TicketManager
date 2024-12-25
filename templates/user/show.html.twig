@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Your profile{% endblock %}
+
+{% block h1 %}Your profile{% endblock %}
+
+{% block body %}
+    <section
+            class="grid grid-cols-1 sm:grid-cols-2 items-center gap-x-2 gap-y-4 rounded-md border-2 bg-white p-4 text-xl border-blue">
+        <h2 class="mb-4 text-4xl">Email</h2>
+        <div>{{ user.email }}</div>
+        <hr class="col-span-2 border border-blue">
+        <h2 class="mb-4 text-4xl">Role</h2>
+        <div>{{ user.role | replace({ 'ROLE_': '' }) }}</div>
+        <hr class="col-span-2 border border-blue">
+        <h2 class="mb-4 text-4xl">Created</h2>
+        <div>{{ user.createdAt | format_datetime(pattern: "dd/MM/y HH:mm") }}</div>
+    </section>
+{% endblock %}

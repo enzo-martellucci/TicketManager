@@ -20,7 +20,7 @@
             <tr class="{{ loop.index % 2 == 0 ? 'bg-gray-200' : 'bg-gray-50' }}">
                 <td class="t-cell text-center">{{ user.id }}</td>
                 <td class="t-cell">{{ user.email }}</td>
-                <td class="t-cell text-center">{{ user.roles[0] | replace({ 'ROLE_': '' }) }}</td>
+                <td class="t-cell text-center">{{ user.role | replace({ 'ROLE_': '' }) }}</td>
                 <td class="t-cell text-center">{{ user.createdAt | format_datetime(pattern: "dd/MM/y HH:mm") }}</td>
                 <td class="t-cell">
                     <div class="flex justify-center gap-2 flex-wrap">

@@ -4,5 +4,13 @@
 {% block h1 %}New ticket{% endblock %}
 
 {% block body %}
-    {{ form(form) }}
+    <div class="form">
+        {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.priority) }}
+        {{ form_row(form.deadline) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.save) }}
+        {{ form_end(form) }}
+    </div>
 {% endblock %}

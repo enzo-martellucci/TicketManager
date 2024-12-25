@@ -15,4 +15,13 @@ class TicketRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Ticket::class);
     }
+
+    public function findTicketBySupport(int $id): array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.assigned_to = :user')
+            ->setParameter('user', $id)
+            ->getQuery()
+            ->getResult();
+    }
 }

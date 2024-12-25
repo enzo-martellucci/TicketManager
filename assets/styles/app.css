@@ -3,13 +3,29 @@
 @tailwind utilities;
 
 .nav-item {
-    @apply flex gap-x-6 items-center p-3 rounded-md transition-colors duration-500;
+    @apply flex items-center gap-x-6 rounded-md p-3 transition-colors duration-500;
 }
 
 .t-head {
-    @apply px-2 md:px-4 py-4 border-2 border-blue;
+    @apply border-2 px-2 py-4 border-blue md:px-4;
 }
 
 .t-cell {
-    @apply px-2 md:px-4 py-2 border-2 border-blue;
+    @apply border-2 px-2 py-2 border-blue md:px-4;
+}
+
+.form form {
+    @apply flex flex-col gap-6;
+}
+
+.form div label {
+    @apply mb-2 block text-2xl;
+}
+
+.form div input, .form div textarea, .form div select {
+    @apply w-full rounded p-2;
+}
+
+.form div button {
+    @apply text-2xl rounded px-10 py-2 text-white transition-colors duration-500 bg-light-blue hover:bg-blue hover:text-black;
 }
